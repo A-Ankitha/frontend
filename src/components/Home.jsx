@@ -8,12 +8,13 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import {Link} from 'react-router-dom'
 import '../css/Home.css'
+const API = "https://backend-taupe-eight-57.vercel.app/api/v1";
 
 export default function Home() {
   const [work, setWork] = useState([])
   const [name, setName] = useState('')
   useEffect(() => {
-    axios.get('http://localhost:5000/api/tasks')
+    axios.get(API)
     .then((res) => {
         setWork(res.data)
     })
@@ -24,15 +25,15 @@ export default function Home() {
 
   const deleteUser = async(id) => {
     try {
-        await axios.delete(`http://localhost:5000/api/tasks/${id}`)
-        setWork(work.filter(ls => ls._id !== ls.id))
+        await axios.delete(`${API}/${id}`)
+        setWork(work.filter(ls => ls._id !== id))
     } catch (error) {
         console.log(error)
     }
   }
   const createUser = async() => {
     try {
-        const res = await axios.post('https://backend-git-main-a-ankithas-projects.vercel.app/api/tasks', {task:name})
+        const res = await axios.post(API, { task: name })
         setWork([...work, res.data])
         
     } catch (error) {

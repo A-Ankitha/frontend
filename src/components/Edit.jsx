@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import '../css/Home.css'
+const API = "https://backend-taupe-eight-57.vercel.app/api/v1";
 
 export default function Edit() {
     const navigate = useNavigate()
@@ -12,7 +13,7 @@ export default function Edit() {
     console.log(id)
     const[name, setName] = useState('')
     useEffect(() => {
-        axios.get(`http://localhost:5000/api/tasks/${id}`)
+        axios.get(`${API}/${id}`)
         .then((res) => {
             setName(res.data.task)
             console.log(name)
@@ -25,7 +26,7 @@ export default function Edit() {
 
     const updateUser = async() => {
         try {
-            await axios.put(`http://localhost:5000/api/tasks/${id}`, {task:name})
+            await axios.put(`${API}/${id}`, { task: name })
             navigate('/')
         } catch (error) {
             console.log(error)
