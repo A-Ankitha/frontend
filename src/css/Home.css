@@ -1,0 +1,73 @@
+.main{
+   margin-left: 500px;
+   
+   
+}
+.task{
+   background-color: white; 
+   font-family: 'Courier New', Courier, monospace;
+   font-weight: 100;
+   font-size: small;
+   width: 500px;
+   height: 150px;
+   color: black;
+}
+input{
+  margin-left: 80px;
+  height: 30px;
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+  width: 300px;
+  background-color: white;
+  color: black;
+}
+.btn{
+  background-color: rgb(126, 48, 225);
+  border-bottom-right-radius: 10px;
+  border-top-left-radius: 10px;
+  height: 36px;
+}
+.btn1{
+  background-color: rgb(57, 153, 24);
+  border-radius: 5px;
+}
+
+.btn2{
+  background-color: red;
+  border-radius: 5px;
+}
+.task_manager{
+  margin-left: 130px;
+  margin-right: 130px;
+  font-size: 30px;
+  
+}
+.main_container {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 10px;
+   
+  }
+  
+  .list_container {
+    
+    flex: 1;
+    overflow: hidden;
+  
+
+  }
+  
+  .right_buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 16px;
+  }
+
+  li{
+      list-style-type: none;
+      color: black;
+  }
