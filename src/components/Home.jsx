@@ -1,72 +1,58 @@
-import axios from 'axios'
-
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { IoTrashBinOutline } from "react-icons/io5";
 import { FaRegEdit } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import '../css/Home.css';
 
-import { useEffect } from 'react'
-import { useState } from 'react'
-import {Link} from 'react-router-dom'
-import '../css/Home.css'
 const API = "https://backend-taupe-eight-57.vercel.app/api/v1";
 
 export default function Home() {
-  const [work, setWork] = useState([])
-  const [name, setName] = useState('')
-  useEffect(() => {
-    axios.get(API)
-    .then((res) => {
-        setWork(res.data)
-    })
-    .catch((error) => {
-        console.log(error)
-    })
-  },[])
+  const [work, setWork] = useState([]);
+  const [name, setName] = useState('');
 
-  const deleteUser = async(id) => {
+  const fetchTasks = () => {
+    axios.get(API).then(res => setWork(res.data)).catch(err => console.log(err));
+  };
+
+  useEffect(() => { fetchTasks(); }, []);
+
+  const createUser = async () => {
+    if (!name) return;
     try {
-        await axios.delete(`${API}/${id}`)
-        setWork(work.filter(ls => ls._id !== id))
-    } catch (error) {
-        console.log(error)
-    }
-  }
-  const createUser = async() => {
+      const res = await axios.post(API, { task: name });
+      setWork([...work, res.data]);
+      setName(''); 
+    } catch (err) { console.log(err); }
+  };
+
+  const deleteUser = async (id) => {
     try {
-        const res = await axios.post(API, { task: name })
-        setWork([...work, res.data])
-        
-    } catch (error) {
-        console.log(error)
-    }
-  }
-   
+      await axios.delete(`${API}/${id}`);
+      setWork(work.filter(item => item._id !== id));
+    } catch (err) { console.log(err); }
+  };
+
   return (
     <div className='main'>
-      <div className='task'>
+      <div className='task-card'>
         <h2 className='task_manager'>Task Manager</h2>
-        <input type="text" placeholder='eg: drink water' value = {name} onChange = {(e) => setName(e.target.value)}/>
-        <button onClick = {createUser} className='btn'>create</button>
-      </div>
-      <div className='list'>
-        <ul>
-            {work.map((list) => 
-            
-                <li key = {(list._id)}>
-                    <div className='main_container'>
-                        <div className='list_container'>{list.task}</div>
-                        <div className='right_buttons'>
-                            <div>
-                           <Link to = {`/edit/${list._id}`}><button className='btn1'><FaRegEdit /></button></Link>
-                            </div>
-                            <div> <button onClick = {()=>deleteUser(list._id)} className='btn2'><IoTrashBinOutline /></button> </div>
-                        </div>
-                    </div>
-                </li>
-            )}
-        </ul>
+        <div className="input_container">
+          <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="eg: drink water"/>
+          <button onClick={createUser} className='btn-create'>Create</button>
         </div>
-       
+      </div>
+      <div className='list-area'>
+        {work.map((item) => (
+          <div key={item._id} className='main_container'>
+            <div className='list_container'>{item.task}</div>
+            <div className='right_buttons'>
+              <Link to={`/edit/${item._id}`}><button className='btn-edit'><FaRegEdit /></button></Link>
+              <button onClick={() => deleteUser(item._id)} className='btn-delete'><IoTrashBinOutline /></button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
-  )
+  );
 }

@@ -1,73 +1,70 @@
-.main{
-   margin-left: 500px;
-   
-   
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+  background-color: #242424;
 }
-.task{
-   background-color: white; 
-   font-family: 'Courier New', Courier, monospace;
-   font-weight: 100;
-   font-size: small;
-   width: 500px;
-   height: 150px;
-   color: black;
-}
-input{
-  margin-left: 80px;
-  height: 30px;
-  border-bottom-left-radius: 10px;
-  border-top-left-radius: 10px;
-  width: 300px;
+
+.task-card {
   background-color: white;
-  color: black;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
 }
-.btn{
+
+.task_manager {
+  text-align: center;
+  color: #333;
+  font-family: 'Courier New', Courier, monospace;
+  margin-bottom: 20px;
+}
+
+.input_container {
+  display: flex;
+}
+
+input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px 0 0 8px;
+  outline: none;
+  color: #333;
+}
+
+.btn-create {
   background-color: rgb(126, 48, 225);
-  border-bottom-right-radius: 10px;
-  border-top-left-radius: 10px;
-  height: 36px;
-}
-.btn1{
-  background-color: rgb(57, 153, 24);
-  border-radius: 5px;
+  color: white;
+  border: none;
+  padding: 0 20px;
+  border-radius: 0 8px 8px 0;
+  cursor: pointer;
 }
 
-.btn2{
-  background-color: red;
-  border-radius: 5px;
+.list-area {
+  width: 100%;
+  max-width: 500px;
 }
-.task_manager{
-  margin-left: 130px;
-  margin-right: 130px;
-  font-size: 30px;
-  
-}
+
 .main_container {
-    background-color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px;
-    margin-top: 10px;
-    border-radius: 10px;
-   
-  }
-  
-  .list_container {
-    
-    flex: 1;
-    overflow: hidden;
-  
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border-left: 5px solid rgb(126, 48, 225);
+}
 
-  }
-  
-  .right_buttons {
-    display: flex;
-    gap: 10px;
-    margin-left: 16px;
-  }
+.list_container { color: #333; flex: 1; }
 
-  li{
-      list-style-type: none;
-      color: black;
-  }
+.right_buttons { display: flex; gap: 10px; }
+
+.btn-edit { background-color: #399918; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; }
+.btn-delete { background-color: #ff4d4d; color: white; border: none; padding: 8px; border-radius: 4px; cursor: pointer; }
